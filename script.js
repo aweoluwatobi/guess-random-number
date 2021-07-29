@@ -4,6 +4,9 @@ function getRandom() {
   return Math.floor(Math.random() * 20) + 1;
 }
 
+//WHY USE AN ONCLICK AND NOT AN ADD EVENT LISTENER
+// GOOGLE IT
+
 // Generate random number between 1 and 20
 
 // Store Random number
@@ -23,13 +26,13 @@ const guessInput = document.querySelector('.guess');
 
 const guessNumber = function () {
   if (guessInput.value < secretNumber) {
-    msgElement.textContent = 'Too low!';
+    msgElement.textContent = '📉 Too low!';
     score.textContent -= 1;
   } else if (guessInput.value > secretNumber) {
-    msgElement.textContent = 'Too High!';
+    msgElement.textContent = '📈 Too High!';
     score.textContent -= 1;
   } else {
-    msgElement.textContent = 'Correct Number!';
+    msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
     // High score is set to secret number if the secret number is greater that current high score value
     if (secretNumber > highScore.textContent) {
@@ -38,8 +41,9 @@ const guessNumber = function () {
     checkBtn.disabled = true;
   }
   // Set score value to 0
-  if (score.textContent < 0) {
-    score.textContent = 0;
+  if (score.textContent == 0) {
+    msgElement.textContent = '💥 You lost the game';
+    checkBtn.disabled = true;
   }
 };
 
