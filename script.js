@@ -23,6 +23,8 @@ const highScore = document.querySelector('.highscore');
 const againBtn = document.querySelector('.again');
 // Get guess Input element
 const guessInput = document.querySelector('.guess');
+// Get number element
+const number = document.querySelector('.number');
 
 const guessNumber = function () {
   if (guessInput.value < secretNumber) {
@@ -34,6 +36,7 @@ const guessNumber = function () {
   } else {
     msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
+    number.textContent = guessInput.value;
     // High score is set to secret number if the secret number is greater that current high score value
     if (secretNumber > highScore.textContent) {
       highScore.textContent = secretNumber;
@@ -58,6 +61,7 @@ againBtn.onclick = function () {
   document.body.style.backgroundColor = '#222';
   score.textContent = 20;
   msgElement.textContent = 'Start guessing...';
+  number.textContent = '?';
   // click again button and reset random number
   secretNumber = getRandom();
   checkBtn.disabled = false;
