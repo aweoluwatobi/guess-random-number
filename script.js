@@ -1,13 +1,9 @@
 'use strict';
-// Random number function
+
+// Generate random number between 1 and 20
 function getRandom() {
   return Math.floor(Math.random() * 20) + 1;
 }
-
-//WHY USE AN ONCLICK AND NOT AN ADD EVENT LISTENER
-// GOOGLE IT
-
-// Generate random number between 1 and 20
 
 // Store Random number
 let secretNumber = getRandom();
@@ -26,6 +22,7 @@ const guessInput = document.querySelector('.guess');
 // Get number element
 const number = document.querySelector('.number');
 
+// Guess a number.
 const guessNumber = function () {
   if (guessInput.value < secretNumber) {
     msgElement.textContent = '📉 Too low!';
@@ -50,13 +47,8 @@ const guessNumber = function () {
   }
 };
 
-// Event triggered when Check button is clicked
-checkBtn.onclick = function () {
-  guessNumber();
-};
-
-// Event triggered when Check button is clicked
-againBtn.onclick = function () {
+//When you hit the again button, game refreshes
+const again = function () {
   document.querySelector('.guess').value = '';
   document.body.style.backgroundColor = '#222';
   score.textContent = 20;
@@ -67,5 +59,8 @@ againBtn.onclick = function () {
   checkBtn.disabled = false;
 };
 
-// Enter a value and click on the check button.
-// Use the debugger to walk through the code
+// Event triggered when Check button is clicked
+checkBtn.addEventListener('click', guessNumber);
+
+// Event triggered when Check button is clicked
+againBtn.addEventListener('click', again);
