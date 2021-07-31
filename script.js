@@ -25,27 +25,30 @@ const number = document.querySelector('.number');
 //
 // Event triggered when Check button is clicked
 checkBtn.addEventListener('click', function () {
-  if (!guessInput.value) {
+  // Convert guess input to number for strict comparison
+  const guess = Number(guessInput.value);
+  if (!guess) {
     msgElement.textContent = '⛔ No number!';
-  } else if (guessInput.value < secretNumber) {
+  } else if (guess < secretNumber) {
     msgElement.textContent = '📉 Too low!';
     score.textContent -= 1;
-  } else if (guessInput.value > secretNumber) {
+  } else if (guess > secretNumber) {
     msgElement.textContent = '📈 Too High!';
     score.textContent -= 1;
-  } else if (guessInput.value == secretNumber) {
+  } else if (guess === secretNumber) {
     msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
-    number.textContent = guessInput.value;
+    number.textContent = guess;
     // High score is set to secret number if the secret number is greater that current high score value
-    if (secretNumber > highScore.textContent) {
+
+    if (secretNumber > Number(highScore.textContent)) {
       highScore.textContent = secretNumber;
     }
     //Disable check button
     checkBtn.disabled = true;
   }
   // if score value is 0, player loses game
-  if (score.textContent == 0) {
+  if (Number(score.textContent) === 0) {
     msgElement.textContent = '💥 You lost the game';
     checkBtn.disabled = true;
   }
