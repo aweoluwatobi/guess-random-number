@@ -2,7 +2,7 @@
 
 // Generate random number between 1 and 20
 function getRandom() {
-  return Math.floor(Math.random() * 20) + 1;
+  return Math.trunc(Math.random() * 20) + 1;
 }
 
 // Store Random number
@@ -33,7 +33,7 @@ checkBtn.addEventListener('click', function () {
   } else if (guessInput.value > secretNumber) {
     msgElement.textContent = '📈 Too High!';
     score.textContent -= 1;
-  } else {
+  } else if (guessInput.value == secretNumber) {
     msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
     number.textContent = guessInput.value;
