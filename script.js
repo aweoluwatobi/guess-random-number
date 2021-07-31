@@ -22,9 +22,12 @@ const guessInput = document.querySelector('.guess');
 // Get number element
 const number = document.querySelector('.number');
 
-// Guess a number.
-const guessNumber = function () {
-  if (guessInput.value < secretNumber) {
+//
+// Event triggered when Check button is clicked
+checkBtn.addEventListener('click', function () {
+  if (!guessInput.value) {
+    msgElement.textContent = '⛔ No number!';
+  } else if (guessInput.value < secretNumber) {
     msgElement.textContent = '📉 Too low!';
     score.textContent -= 1;
   } else if (guessInput.value > secretNumber) {
@@ -38,29 +41,25 @@ const guessNumber = function () {
     if (secretNumber > highScore.textContent) {
       highScore.textContent = secretNumber;
     }
+    //Disable check button
     checkBtn.disabled = true;
   }
-  // Set score value to 0
+  // if score value is 0, player loses game
   if (score.textContent == 0) {
     msgElement.textContent = '💥 You lost the game';
     checkBtn.disabled = true;
   }
-};
+});
 
-//When you hit the again button, game refreshes
-const again = function () {
-  document.querySelector('.guess').value = '';
+//Event triggered when Check button is clicked
+againBtn.addEventListener('click', function () {
+  guessInput.value = '';
   document.body.style.backgroundColor = '#222';
   score.textContent = 20;
   msgElement.textContent = 'Start guessing...';
   number.textContent = '?';
-  // click again button and reset random number
+  //reset random number
   secretNumber = getRandom();
+  // Make check button work
   checkBtn.disabled = false;
-};
-
-// Event triggered when Check button is clicked
-checkBtn.addEventListener('click', guessNumber);
-
-// Event triggered when Check button is clicked
-againBtn.addEventListener('click', again);
+});
