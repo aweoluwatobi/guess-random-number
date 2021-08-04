@@ -60,7 +60,7 @@ checkBtn.addEventListener('click', function () {
   }
 });
 
-//Event triggered when Check button is clicked
+//Event triggered when again button is clicked
 againBtn.addEventListener('click', function () {
   guessInput.value = '';
   document.body.style.backgroundColor = '#222';
