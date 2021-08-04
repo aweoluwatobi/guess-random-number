@@ -7,6 +7,8 @@ function getRandom() {
 
 // Store Random number
 let secretNumber = getRandom();
+
+// set score and highscore
 let score = 20;
 let highScore = 0;
 
