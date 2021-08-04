@@ -27,21 +27,18 @@ const number = document.querySelector('.number');
 checkBtn.addEventListener('click', function () {
   // Convert guess input to number for strict comparison
   const guess = Number(guessInput.value);
+  // When there is no input
   if (!guess) {
     msgElement.textContent = '⛔ No number!';
-  } else if (guess < secretNumber) {
-    msgElement.textContent = '📉 Too low!';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else if (guess > secretNumber) {
-    msgElement.textContent = '📈 Too High!';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else if (guess === secretNumber) {
+  }
+  // When guess is right
+  else if (guess === secretNumber) {
     msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
-    number.textContent = guess;
+    document.querySelector('.number').style.width = '30rem';
+    number.textContent = secretNumber;
 
+    // set highscore
     if (score > highScore) {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
@@ -49,11 +46,17 @@ checkBtn.addEventListener('click', function () {
     //Disable check button
     checkBtn.disabled = true;
   }
-  // if score value is 0, player loses game
-  if (score < 1) {
-    msgElement.textContent = '💥 You lost the game';
-    document.querySelector('.score').textContent = 0;
-    checkBtn.disabled = true;
+  // When guess is higher or lower than secret number
+  else if (guess !== secretNumber) {
+    if (score > 1) {
+      msgElement.textContent =
+        guess < secretNumber ? '📉 Too low!' : '📈 Too High!';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      msgElement.textContent = '💥 You lost the game';
+      document.querySelector('.score').textContent = 0;
+    }
   }
 });
 
@@ -61,6 +64,7 @@ checkBtn.addEventListener('click', function () {
 againBtn.addEventListener('click', function () {
   guessInput.value = '';
   document.body.style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
   score = 20;
   document.querySelector('.score').textContent = score;
   msgElement.textContent = 'Start guessing...';
