@@ -1,3 +1,6 @@
+/* The Complete JavaScript Course 2021: From Zero to Expert!*/
+/* Code rewritten by me */
+
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
@@ -87,7 +90,9 @@ h1 {
   left: 50%;
   color: #222;
   background-color: #eee;
-  padding: 3rem 4.5rem;
+  width: 15rem;
+  padding: 3rem 0;
+  text-align: center;
   transform: translate(-50%, 50%);
 }
 
@@ -100,7 +105,7 @@ h1 {
   font-size: 5rem;
   color: #eee;
   text-align: center;
-  width: 50%;
+  width: 25rem;
   display: block;
 }
 
