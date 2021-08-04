@@ -12,9 +12,9 @@ const checkBtn = document.querySelector('.check');
 //Get Message element
 const msgElement = document.querySelector('.message');
 // Get Score element
-const score = document.querySelector('.score');
+let score = 20;
 // Get Highscore element
-const highScore = document.querySelector('.highscore');
+let highScore = 0;
 // Get Again Button element
 const againBtn = document.querySelector('.again');
 // Get guess Input element
@@ -31,25 +31,28 @@ checkBtn.addEventListener('click', function () {
     msgElement.textContent = '⛔ No number!';
   } else if (guess < secretNumber) {
     msgElement.textContent = '📉 Too low!';
-    score.textContent -= 1;
+    score--;
+    document.querySelector('.score').textContent = score;
   } else if (guess > secretNumber) {
     msgElement.textContent = '📈 Too High!';
-    score.textContent -= 1;
+    score--;
+    document.querySelector('.score').textContent = score;
   } else if (guess === secretNumber) {
     msgElement.textContent = '🎉 Correct Number!';
     document.body.style.backgroundColor = '#60b347';
     number.textContent = guess;
-    // High score is set to secret number if the secret number is greater that current high score value
 
-    if (secretNumber > Number(highScore.textContent)) {
-      highScore.textContent = secretNumber;
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
     }
     //Disable check button
     checkBtn.disabled = true;
   }
   // if score value is 0, player loses game
-  if (Number(score.textContent) === 0) {
+  if (score < 1) {
     msgElement.textContent = '💥 You lost the game';
+    document.querySelector('.score').textContent = 0;
     checkBtn.disabled = true;
   }
 });
@@ -58,7 +61,8 @@ checkBtn.addEventListener('click', function () {
 againBtn.addEventListener('click', function () {
   guessInput.value = '';
   document.body.style.backgroundColor = '#222';
-  score.textContent = 20;
+  score = 20;
+  document.querySelector('.score').textContent = score;
   msgElement.textContent = 'Start guessing...';
   number.textContent = '?';
   //reset random number
