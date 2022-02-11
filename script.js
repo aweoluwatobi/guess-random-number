@@ -5,6 +5,8 @@ const getRandom = () => Math.floor(Math.random() * 20 - 1 + 1) + 1;
 
 // Store Random number
 let secretNumber = getRandom();
+
+// set score and highscore
 let score = 20;
 let highScore = 0;
 
