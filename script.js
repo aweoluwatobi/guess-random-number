@@ -1,9 +1,7 @@
 'use strict';
 
 // Generate random number between 1 and 20
-function getRandom() {
-  return Math.trunc(Math.random() * 20) + 1;
-}
+const getRandom = () => Math.floor(Math.random() * 20 - 1 + 1) + 1;
 
 // Store Random number
 let secretNumber = getRandom();
@@ -14,32 +12,32 @@ let highScore = 0;
 const checkBtn = document.querySelector('.check');
 const againBtn = document.querySelector('.again');
 
-// Message output
-const displayMessage = function (message) {
-  document.querySelector('.message').textContent = message;
-};
-// display score
-const setScore = function (score) {
-  document.querySelector('.score').textContent = score;
-};
-// set number value
-const setNumber = function (numberValue) {
-  document.querySelector('.number').textContent = numberValue;
-};
+// display message
+const displayMessage = message =>
+  (document.querySelector('.message').textContent = message);
+// set score
+const setScore = score =>
+  (document.querySelector('.score').textContent = score);
+// set Highscore
+const setHighScore = highscore =>
+  (document.querySelector('.highscore').textContent = highscore);
+// set value
+const setValue = value => (document.querySelector('.guess').value = value);
 // set width of number box
-const numberBoxWidth = function (width) {
-  document.querySelector('.number').style.width = width;
-};
+const numberBoxWidth = width =>
+  (document.querySelector('.number').style.width = width);
+// set Number
+const numberBoxDisplay = value =>
+  (document.querySelector('.number').textContent = value);
 // change body's background color
-const setBackgroundColor = function (color) {
-  document.querySelector('body').style.backgroundColor = color;
-};
+const setBackgroundColor = color =>
+  (document.querySelector('body').style.backgroundColor = color);
 
 // Event triggered when Check button is clicked
 checkBtn.addEventListener('click', function () {
-  // Input value
+  // Get the value of the guess
   const guess = Number(document.querySelector('.guess').value);
-  // When there is no input
+  // When there is no input display No number
   if (!guess) {
     displayMessage('⛔ No number!');
   }
@@ -48,17 +46,17 @@ checkBtn.addEventListener('click', function () {
     displayMessage('🎉 Correct Number!');
     setBackgroundColor('#60b347');
     numberBoxWidth('30rem');
-    setNumber(secretNumber);
+    numberBoxDisplay(secretNumber);
 
-    // set highscore
+    // set highscore if score is higher than current high score
     if (score > highScore) {
       highScore = score;
-      document.querySelector('.highscore').textContent = highScore;
+      setHighScore(highScore);
     }
     //Disable check button
     checkBtn.disabled = true;
   }
-  // When guess is higher or lower than secret number
+  // When guess is lower or higher than secret number display too low or too high respectively
   else if (guess !== secretNumber) {
     if (score > 1) {
       displayMessage(guess < secretNumber ? '📉 Too low!' : '📈 Too High!');
@@ -66,21 +64,23 @@ checkBtn.addEventListener('click', function () {
       score--;
       setScore(score);
     } else {
+      // If score is 0, you lose
       displayMessage('💥 You lost the game');
       setScore(0);
+      setBackgroundColor('red');
     }
   }
 });
 
 //Event triggered when again button is clicked
 againBtn.addEventListener('click', function () {
-  document.querySelector('.guess').value = '';
+  setValue('');
   setBackgroundColor('#222');
   numberBoxWidth('15rem');
   score = 20;
   setScore(score);
   displayMessage('Start guessing...');
-  setNumber('?');
+  numberBoxDisplay('?');
   //reset random number
   secretNumber = getRandom();
   // Make check button work
